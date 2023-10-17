@@ -1,10 +1,15 @@
-await import("../functions/walker.js");
+await import("../functions/internal/logging.js");
+await import("../functions/internal/walker.js");
+
+global.blacket = {};
 
 export default async () => {
     const functions = [];
 
     for (const file of walk("./functions")) {
-        if (!file.endsWith(".js") || file == "walker.js") continue;
+        if (!file.endsWith(".js")) continue;
+
+        console.log(file);
 
         const module = import(`../${file}`).then((module) => module.default);
 
